@@ -1,7 +1,6 @@
 // ============================================================
-//  ТокË — ЗАЩИЩЁННЫЙ СКРИПТ v5.3
-//  + Меню и Сеты сохранены
-//  + Все ошибки исправлены
+//  ТокË — ЗАЩИЩЁННЫЙ СКРИПТ v5.4
+//  Фото в корне (без папки images/)
 // ============================================================
 
 // ⚠️ ЗАМЕНИТЕ НА СВОЙ URL ИЗ APPS SCRIPT
@@ -232,40 +231,40 @@ let isAdminLoggedIn = localStorage.getItem(ADMIN_SESSION_KEY) === 'true';
 let sessionTimer = null;
 
 // ============================================================
-//  БЛОК 8: ДАННЫЕ
+//  БЛОК 8: ДАННЫЕ (ФОТО БЕЗ ПАПКИ images/)
 // ============================================================
 
 function getDefaultData() {
     return {
         defaultProducts: [
             // ===== РОЛЛЫ =====
-            { id: 1, name: 'Чили-вечиринка', desc: 'Лосось, сливочный сыр, огурец', weight: '250 г', price: 700, category: 'rolls', calories: 250, image: 'images/chili-party.jpg' },
-            { id: 2, name: 'Манго-Креветка', desc: 'Креветка, манго, сливочный сыр', weight: '300 г', price: 990, category: 'rolls', calories: 300, image: 'images/mango-shrimp.jpg' },
-            { id: 3, name: 'Филка с клубникой', desc: 'Рис, нори, сыр сливочный, клубника, лосось', weight: '280 г', price: 890, category: 'rolls', calories: 420, image: 'images/strawberry-filka.jpg' },
-            { id: 4, name: 'Манго-кисс', desc: 'Манго, лосось, сыр', weight: '260 г', price: 700, category: 'rolls', calories: 380, image: 'images/mango-kiss.jpg' },
-            { id: 5, name: 'Креветочный бриз', desc: 'Рис, рисовая бумага, сыр сливочный, креветки в темпура, салат', weight: '260 г', price: 700, category: 'rolls', calories: 340, image: 'images/shrimp-breeze.jpg' },
-            { id: 6, name: 'Мангомания', desc: 'Рис, рисовая бумага, сыр сливочный, лосось, манго', weight: '250 г', price: 750, category: 'rolls', calories: 380, image: 'images/mangomania.jpg' },
-            { id: 7, name: 'Карамельная филка', desc: 'Лосось, карамель, кунжут', weight: '280 г', price: 749, category: 'rolls', calories: 420, image: 'images/caramel-filka.jpg' },
-            { id: 8, name: 'Ролл опаленный с гребешком', desc: 'Гребешок, соус, кунжут', weight: '260 г', price: 749, category: 'rolls', calories: 420, image: 'images/roll-scallop.jpg' },
-            { id: 9, name: 'Ролл ройс', desc: 'Ассорти из 4 роллов', weight: '300 г', price: 990, category: 'rolls', calories: 500, image: 'images/roll-royce.jpg' },
+            { id: 1, name: 'Чили-вечиринка', desc: 'Лосось, сливочный сыр, огурец', weight: '250 г', price: 699, category: 'rolls', calories: 380, image: 'chili-party.jpg' },
+            { id: 2, name: 'Манго-Креветка', desc: 'Креветка, манго, сливочный сыр', weight: '300 г', price: 649, category: 'rolls', calories: 340, image: 'mango-shrimp.jpg' },
+            { id: 3, name: 'Филка с клубникой', desc: 'Рис, нори, сыр сливочный, клубника, лосось', weight: '280 г', price: 749, category: 'rolls', calories: 420, image: 'strawberry-filka.jpg' },
+            { id: 4, name: 'Манго-кисс', desc: 'Манго, лосось, сыр', weight: '260 г', price: 699, category: 'rolls', calories: 380, image: 'mango-kiss.jpg' },
+            { id: 5, name: 'Креветочный бриз', desc: 'Рис, рисовая бумага, сыр сливочный, креветки в темпура, салат', weight: '260 г', price: 649, category: 'rolls', calories: 340, image: 'shrimp-breeze.jpg' },
+            { id: 6, name: 'Мангомания', desc: 'Рис, рисовая бумага, сыр сливочный, лосось, манго', weight: '250 г', price: 649, category: 'rolls', calories: 380, image: 'mangomania.jpg' },
+            { id: 7, name: 'Карамельная филка', desc: 'Лосось, карамель, кунжут', weight: '280 г', price: 749, category: 'rolls', calories: 420, image: 'caramel-filka.jpg' },
+            { id: 8, name: 'Ролл опаленный с гребешком', desc: 'Гребешок, соус, кунжут', weight: '260 г', price: 749, category: 'rolls', calories: 420, image: 'roll-scallop.jpg' },
+            { id: 9, name: 'Ролл ройс', desc: 'Ассорти из 4 роллов', weight: '300 г', price: 899, category: 'rolls', calories: 500, image: 'roll-royce.jpg' },
 
             // ===== СУШИ =====
-            { id: 10, name: 'Дымчатый жемчуг', desc: 'Рис, рисовая бумага, сыр сливочный, лосось, тобико, лук зеленый', weight: '250 г', price: 650, category: 'sushi', calories: 240, image: 'images/smoky-pearl.jpg' },
-            { id: 11, name: 'Аками', desc: 'Тунец, рис, васаби', weight: '250 г', price: 990, category: 'sushi', calories: 260, image: 'images/akami.jpg' },
+            { id: 10, name: 'Дымчатый жемчуг', desc: 'Рис, рисовая бумага, сыр сливочный, лосось, тобико, лук зеленый', weight: '250 г', price: 399, category: 'sushi', calories: 240, image: 'smoky-pearl.jpg' },
+            { id: 11, name: 'Аками', desc: 'Тунец, рис, васаби', weight: '250 г', price: 450, category: 'sushi', calories: 260, image: 'akami.jpg' },
 
             // ===== ПИЦЦА (пока пусто) =====
 
             // ===== СЕТЫ =====
-            { id: 12, name: 'Сет номер 1', desc: 'Ассорти роллов и суши', weight: '950 г', price: 1590, category: 'sets', calories: 1800, image: 'images/set-1.jpg' },
-            { id: 13, name: 'Сет номер 2', desc: 'Большой сет для компании', weight: '1100 г', price: 1890, category: 'sets', calories: 2100, image: 'images/set-2.jpg' },
-            { id: 14, name: 'Сет номер 3', desc: 'Премиум сет', weight: '1200 г', price: 2290, category: 'sets', calories: 2300, image: 'images/set-3.jpg' },
-            { id: 15, name: 'Сет суши', desc: 'Ассорти суши', weight: '800 г', price: 1290, category: 'sets', calories: 1500, image: 'images/set-sushi.jpg' },
-            { id: 16, name: 'Сет гунканов', desc: 'Ассорти гунканов', weight: '700 г', price: 1390, category: 'sets', calories: 1400, image: 'images/set-gunkan.jpg' },
-            { id: 17, name: 'Сет Маки', desc: 'Ассорти маки-роллов', weight: '850 г', price: 1490, category: 'sets', calories: 1700, image: 'images/set-maki.jpg' },
-            { id: 18, name: 'Сет фруктовый сад', desc: 'Фруктовые роллы', weight: '700 г', price: 1390, category: 'sets', calories: 1200, image: 'images/set-fruit.jpg' }
+            { id: 12, name: 'Сет номер 1', desc: 'Ассорти роллов и суши', weight: '950 г', price: 1590, category: 'sets', calories: 1800, image: 'set-1.jpg' },
+            { id: 13, name: 'Сет номер 2', desc: 'Большой сет для компании', weight: '1100 г', price: 1890, category: 'sets', calories: 2100, image: 'set-2.jpg' },
+            { id: 14, name: 'Сет номер 3', desc: 'Премиум сет', weight: '1200 г', price: 2290, category: 'sets', calories: 2300, image: 'set-3.jpg' },
+            { id: 15, name: 'Сет суши', desc: 'Ассорти суши', weight: '800 г', price: 1290, category: 'sets', calories: 1500, image: 'set-sushi.jpg' },
+            { id: 16, name: 'Сет гунканов', desc: 'Ассорти гунканов', weight: '700 г', price: 1390, category: 'sets', calories: 1400, image: 'set-gunkan.jpg' },
+            { id: 17, name: 'Сет Маки', desc: 'Ассорти маки-роллов', weight: '850 г', price: 1490, category: 'sets', calories: 1700, image: 'set-maki.jpg' },
+            { id: 18, name: 'Сет фруктовый сад', desc: 'Фруктовые роллы', weight: '700 г', price: 1390, category: 'sets', calories: 1200, image: 'set-fruit.jpg' }
         ],
         defaultPromos: [
-            // ===== АКЦИИ (БЕЗ СЕТОВ) =====
+            // ===== АКЦИИ (СКИДКИ, БОНУСЫ — БЕЗ СЕТОВ) =====
             { title: '🔥 Скидка 20%', desc: 'На первый заказ от 2000 ₽' },
             { title: '🎁 Напиток в подарок', desc: 'При заказе от 1500 ₽' },
             { title: '🍱 Бесплатная доставка', desc: 'При заказе от 2500 ₽' },
@@ -371,7 +370,7 @@ function resetSessionTimer() {
 }
 
 // ============================================================
-//  БЛОК 12: 📧 ОТПРАВКА В GOOGLE ТАБЛИЦУ (FormData)
+//  БЛОК 12: 📧 ОТПРАВКА В GOOGLE ТАБЛИЦУ
 // ============================================================
 
 async function sendOrderToGoogleSheets(orderData) {
@@ -1213,10 +1212,8 @@ async function init() {
         resetSessionTimer();
     }
 
-    console.log('%c🛡️ ТокË — Защищённая версия 5.3', 'color:#d32f2f; font-size:16px; font-weight:bold;');
-    console.log('✅ Сеты — отдельная категория');
-    console.log('✅ Акции — без сетов');
-    console.log('✅ Google Таблицы: FormData');
+    console.log('%c🛡️ ТокË — Защищённая версия 5.4', 'color:#d32f2f; font-size:16px; font-weight:bold;');
+    console.log('✅ Фото без папки images/');
     console.log('✅ Все защиты активны');
 }
 
