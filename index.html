@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- ===== SEO ===== -->
+    <title>ТокË — доставка суши, роллов и пиццы в Твери</title>
+    <meta name="description" content="Закажите суши, роллы и пиццу с доставкой по Твери. ТокË — качественные продукты, вкусная еда и удобный заказ." />
+    <meta name="keywords" content="суши Тверь, роллы Тверь, пицца Тверь, доставка еды Тверь, ТокË" />
+    <meta name="author" content="ТокË" />
+
+    <!-- ===== PWA ===== -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ТокË" />
+    <meta name="theme-color" content="#d32f2f" />
+    <meta name="msapplication-TileColor" content="#d32f2f" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512x512.png" />
+
+    <!-- ===== БЕЗОПАСНОСТЬ ===== -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- ===== FONTAWESOME ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- ===== СТИЛИ ===== -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <!-- ===== BANNER УСТАНОВКИ PWA ===== -->
+    <div id="installBanner">
+        <div class="banner-text">
+            <strong>📱 ТокË</strong>
+            <span>Установите приложение для быстрого заказа</span>
+        </div>
+        <div class="banner-actions">
+            <button class="install-btn" id="installBtn">Установить</button>
+            <button class="close-banner" id="closeInstallBanner">✕</button>
+        </div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo" id="secretLogo">
+                Ток<span>Ë</span>
+                <span class="admin-indicator" id="adminIndicator">🔑 Админ</span>
+            </div>
+            <nav id="mainNav">
+                <a href="#home">Главная</a>
+                <a href="#menu">Меню</a>
+                <a href="#promo">Акции</a>
+                <a href="#reviews">Отзывы</a>
+                <a href="#about">О нас</a>
+                <a href="#delivery">Доставка</a>
+                <a href="#contacts">Контакты</a>
+                <a href="#orders" id="ordersNavLink" style="display:none;">Заказы</a>
+            </nav>
+            <div class="header-actions">
+                <button class="icon-btn" id="profileBtn" title="Профиль"><i class="fas fa-user"></i></button>
+                <button class="icon-btn" id="caloriesBtn" title="Калории"><i class="fas fa-fire"></i></button>
+                <button class="icon-btn" id="cartBtn" title="Корзина">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                <button class="mobile-toggle" id="menuToggle">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== HERO ===== -->
+        <section id="home">
+            <div class="container">
+                <div class="hero">
+                    <div class="hero-content">
+                        <h1>Доставка суши, роллов и пиццы <span>в Твери</span></h1>
+                        <p>Готовим из качественных продуктов и доставляем с заботой о каждом заказе.</p>
+                        <div class="hero-buttons">
+                            <a href="#menu" class="btn btn-primary">Посмотреть меню</a>
+                            <a href="#menu" class="btn btn-outline">Заказать сейчас</a>
+                        </div>
+                    </div>
+                    <div class="hero-image"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CATEGORIES ===== -->
+        <section style="padding-top:0;">
+            <div class="container">
+                <h2 class="section-title">Выберите, что хотите <span>сегодня</span></h2>
+                <div class="categories-grid">
+                    <div class="category-card" onclick="filterMenu('sushi')">
+                        <div class="emoji">🍣</div>
+                        <h3>Суши</h3>
+                        <p>Классические и авторские</p>
+                    </div>
+                    <div class="category-card" onclick="filterMenu('rolls')">
+                        <div class="emoji">🍱</div>
+                        <h3>Роллы</h3>
+                        <p>Свежие, сочные, хрустящие</p>
+                    </div>
+                    <div class="category-card" onclick="filterMenu('pizza')">
+                        <div class="emoji">🍕</div>
+                        <h3>Пицца</h3>
+                        <p>Тонкое тесто, сочные начинки</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== POPULAR ===== -->
+        <section style="padding-top:0;">
+            <div class="container">
+                <h2 class="section-title">Популярное</h2>
+                <div class="products-grid" id="popularGrid"></div>
+            </div>
+        </section>
+
+        <!-- ===== MENU ===== -->
+        <section id="menu">
+            <div class="container">
+                <h2 class="section-title">Наше <span>меню</span></h2>
+                <div class="filter-bar" id="filterBar">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="sushi">Суши</button>
+                    <button class="filter-btn" data-filter="rolls">Роллы</button>
+                    <button class="filter-btn" data-filter="pizza">Пицца</button>
+                    <button class="filter-btn" data-filter="sets">Сеты</button>
+                    <button class="filter-btn" data-filter="promo">Акции</button>
+                </div>
+                <div class="products-grid" id="menuGrid"></div>
+            </div>
+        </section>
+
+        <!-- ===== PROMO ===== -->
+        <section id="promo" style="background:#f8f4f0;">
+            <div class="container">
+                <h2 class="section-title">Акции <span>и предложения</span></h2>
+                <p class="section-subtitle">Специальные предложения для наших клиентов</p>
+                <div class="promo-grid" id="promoGrid"></div>
+            </div>
+        </section>
+
+        <!-- ===== REVIEWS ===== -->
+        <section id="reviews">
+            <div class="container">
+                <h2 class="section-title">Отзывы <span>наших клиентов</span></h2>
+                <div class="reviews-grid" id="reviewsGrid"></div>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT ===== -->
+        <section id="about" style="background:#f8f4f0;">
+            <div class="container">
+                <h2 class="section-title">ТокË — вкус, к которому <span>хочется возвращаться</span></h2>
+                <div class="about-flex info-block" id="aboutBlock">
+                    <div class="admin-actions" id="aboutAdminActions">
+                        <button onclick="editAbout()" title="Редактировать"><i class="fas fa-pen"></i></button>
+                    </div>
+                    <div class="text" id="aboutText">
+                        <p>Мы готовим суши, роллы и пиццу из качественных продуктов, уделяя внимание каждому заказу.</p>
+                        <br>
+                        <p><strong>🍣 Свежие ингредиенты</strong> — только проверенные поставщики.</p>
+                        <p><strong>👨‍🍳 Профессиональные повара</strong> — с любовью к каждому блюду.</p>
+                        <p><strong>🚀 Быстрая доставка</strong> — чтобы еда была горячей.</p>
+                    </div>
+                    <div class="image"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== DELIVERY ===== -->
+        <section id="delivery">
+            <div class="container">
+                <h2 class="section-title">Доставка <span>и оплата</span></h2>
+                <div class="info-block" id="deliveryBlock">
+                    <div class="admin-actions" id="deliveryAdminActions">
+                        <button onclick="editDelivery()" title="Редактировать"><i class="fas fa-pen"></i></button>
+                    </div>
+                    <div id="deliveryContent">
+                        <p><strong>📍 Доставка осуществляется по Твери</strong></p>
+                        <p><strong>💰 Минимальная сумма заказа:</strong> 1000 ₽</p>
+                        <p><strong>🚚 Стоимость доставки:</strong> 200 ₽ (может меняться)</p>
+                        <p><strong>🏠 Самовывоз:</strong> Адрес самовывоза уточняется</p>
+                        <p><strong>💳 Способы оплаты:</strong> Наличными, картой через терминал, онлайн-оплата</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CONTACTS ===== -->
+        <section id="contacts" style="background:#f8f4f0;">
+            <div class="container">
+                <h2 class="section-title">Контакты</h2>
+                <div class="contacts-grid" id="contactsGrid">
+                    <div class="contact-item"><i class="fas fa-phone"></i> <span><strong id="contactPhone">+7 (999) 123-45-67</strong></span></div>
+                    <div class="contact-item"><i class="fas fa-map-pin"></i> <span><strong id="contactAddress">г. Тверь, ул. Примерная, д. 1</strong></span></div>
+                    <div class="contact-item"><i class="fas fa-store"></i> <span id="contactPickup">Самовывоз: адрес уточняется</span></div>
+                    <div class="contact-item"><i class="fab fa-vk"></i> <span><a href="#" onclick="alert('🔗 Ссылка на VK (заглушка)')" style="color:#d32f2f;font-weight:600;">Мы ВКонтакте</a></span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ORDERS HISTORY ===== -->
+        <section id="orders" style="display:none;">
+            <div class="container">
+                <h2 class="section-title">История <span>заказов</span></h2>
+                <div id="ordersList"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== CART MODAL ===== -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <button class="modal-close" id="cartModalClose">✕</button>
+            <h2><i class="fas fa-shopping-bag" style="color:#d32f2f;"></i> Корзина</h2>
+            <div id="cartItemsContainer"></div>
+            <div class="cart-min-warning" id="cartMinWarning">⚠️ Минимальная сумма заказа — 1000 ₽</div>
+            <div class="cart-total-row">
+                <span>Итого:</span>
+                <span id="cartTotal">0 ₽</span>
+            </div>
+            <button class="btn btn-primary" id="checkoutBtn" style="width:100%; margin-top:12px;">Оформить заказ</button>
+            <button class="btn btn-outline" id="clearCartBtn" style="width:100%; margin-top:8px;">Очистить корзину</button>
+        </div>
+    </div>
+
+    <!-- ===== CALORIES MODAL ===== -->
+    <div class="modal" id="caloriesModal">
+        <div class="modal-content">
+            <button class="modal-close" id="caloriesModalClose">✕</button>
+            <h2><i class="fas fa-fire" style="color:#ff6b35;"></i> Калорийность заказа</h2>
+            <div style="display:flex; justify-content:space-between; margin-top:12px;">
+                <span>Прогресс: <span id="caloriesPercent">0%</span></span>
+                <span><strong id="totalCalories">0</strong> / 2000 ккал</span>
+            </div>
+            <div class="calories-progress"><div class="bar" id="caloriesBar"></div></div>
+            <div id="caloriesBreakdown"></div>
+            <div id="caloriesTips"></div>
+        </div>
+    </div>
+
+    <!-- ===== PROFILE MODAL ===== -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content">
+            <button class="modal-close" id="profileModalClose">✕</button>
+            <h2><i class="fas fa-user" style="color:#d32f2f;"></i> Профиль</h2>
+            <div class="form-group">
+                <label>Ваше имя</label>
+                <input type="text" id="profileName" placeholder="Иван Иванов" autocomplete="name" />
+            </div>
+            <div class="form-group">
+                <label>Телефон</label>
+                <input type="tel" id="profilePhone" placeholder="+7 999 123-45-67" autocomplete="tel" />
+            </div>
+            <button class="btn btn-primary" id="profileSaveBtn" style="width:100%;">Сохранить</button>
+        </div>
+    </div>
+
+    <!-- ===== ORDER MODAL (С АДРЕСОМ И СОГЛАСИЕМ) ===== -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <button class="modal-close" id="orderModalClose">✕</button>
+            <h2><i class="fas fa-clipboard-list" style="color:#d32f2f;"></i> Оформление заказа</h2>
+            <form id="orderForm" autocomplete="on" novalidate>
+
+                <!-- КОНТАКТЫ -->
+                <div class="form-group">
+                    <label>Имя <span class="required">*</span></label>
+                    <input type="text" id="orderName" placeholder="Ваше имя" required minlength="2" maxlength="50" autocomplete="name" />
+                </div>
+                <div class="form-group">
+                    <label>Телефон <span class="required">*</span></label>
+                    <input type="tel" id="orderPhone" placeholder="+7 999 123-45-67" required autocomplete="tel" />
+                </div>
+
+                <!-- СПОСОБ ПОЛУЧЕНИЯ -->
+                <div class="form-group">
+                    <label>Способ получения</label>
+                    <select id="orderDeliveryType">
+                        <option value="delivery">🚚 Доставка</option>
+                        <option value="pickup">🏠 Самовывоз</option>
+                    </select>
+                </div>
+
+                <!-- АДРЕС ДОСТАВКИ (ОБЯЗАТЕЛЬНЫЕ ПОЛЯ) -->
+                <div class="delivery-fields" id="deliveryFields">
+                    <div class="address-title">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Адрес доставки
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Улица <span class="required">*</span></label>
+                        <input type="text" id="orderStreet" placeholder="ул. Пушкина" required maxlength="100" autocomplete="street-address" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Дом <span class="required">*</span></label>
+                        <input type="text" id="orderHouse" placeholder="10" required maxlength="10" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Квартира <span class="required">*</span></label>
+                        <input type="text" id="orderApartment" placeholder="45" required maxlength="10" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Подъезд <span class="required">*</span></label>
+                        <input type="text" id="orderEntrance" placeholder="2" required maxlength="5" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Этаж <span class="required">*</span></label>
+                        <input type="text" id="orderFloor" placeholder="5" required maxlength="5" />
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Комментарий к заказу</label>
+                        <input type="text" id="orderComment" placeholder="Домофон 123" maxlength="200" />
+                    </div>
+                </div>
+
+                <!-- ОПЛАТА -->
+                <div class="form-group">
+                    <label>Способ оплаты</label>
+                    <select id="orderPayment">
+                        <option value="cash">💰 Наличными</option>
+                        <option value="terminal">💳 Картой через терминал</option>
+                        <option value="online">💳 Онлайн-оплата</option>
+                    </select>
+                </div>
+
+                <!-- СОГЛАСИЕ -->
+                <div class="privacy-consent">
+                    <input type="checkbox" id="privacyConsent" required />
+                    <label for="privacyConsent">
+                        Я согласен на обработку персональных данных в соответствии с
+                        <a href="#" onclick="alert('Политика конфиденциальности'); return false;">политикой конфиденциальности</a>.
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width:100%; margin-top:8px;" id="submitOrderBtn">
+                    Оформить заказ
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== ADMIN LOGIN ===== -->
+    <div class="admin-login-overlay" id="adminLoginOverlay">
+        <div class="admin-login-box">
+            <div class="lock-icon">🔐</div>
+            <h3>Вход в админ-панель</h3>
+            <p class="sub">Введите пароль для управления сайтом</p>
+            <input type="password" id="adminPasswordInput" placeholder="Введите пароль" autocomplete="off" />
+            <button class="btn btn-primary" id="adminLoginBtn">Войти</button>
+            <div class="error" id="adminLoginError">❌ Неверный пароль</div>
+            <div class="security-note">
+                🔒 После 5 неудачных попыток вход заблокируется на 15 минут
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ADMIN PANEL ===== -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="panel-header">
+            <h3><i class="fas fa-crown"></i> Управление</h3>
+            <button class="close-panel" id="closeAdminPanel">✕</button>
+        </div>
+        <div class="admin-tabs">
+            <button class="active" data-tab="products">Товары</button>
+            <button data-tab="promo">Акции</button>
+            <button data-tab="reviews">Отзывы</button>
+            <button data-tab="settings">Настройки</button>
+            <button data-tab="security">Безопасность</button>
+        </div>
+
+        <!-- Товары -->
+        <div class="admin-section active" id="tab-products">
+            <div class="form-group">
+                <label>Название (2-50)</label>
+                <input type="text" id="adminProductName" placeholder="Филадельфия" maxlength="50" />
+            </div>
+            <div class="form-group">
+                <label>Описание (3-200)</label>
+                <input type="text" id="adminProductDesc" placeholder="Лосось, сливочный сыр" maxlength="200" />
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Цена (₽)</label>
+                    <input type="number" id="adminProductPrice" placeholder="699" min="1" max="999999" />
+                </div>
+                <div class="form-group">
+                    <label>Вес</label>
+                    <input type="text" id="adminProductWeight" placeholder="250 г" maxlength="20" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Калории</label>
+                    <input type="number" id="adminProductCalories" placeholder="380" min="0" max="10000" />
+                </div>
+                <div class="form-group">
+                    <label>Категория</label>
+                    <select id="adminProductCategory">
+                        <option value="rolls">Роллы</option>
+                        <option value="sushi">Суши</option>
+                        <option value="pizza">Пицца</option>
+                        <option value="sets">Сеты</option>
+                        <option value="promo">Акции</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>URL фото</label>
+                <input type="url" id="adminProductImage" placeholder="https://..." maxlength="500" />
+            </div>
+            <button class="btn btn-primary" id="adminAddProductBtn">➕ Добавить товар</button>
+            <div class="item-list" id="adminProductList"></div>
+        </div>
+
+        <!-- Акции -->
+        <div class="admin-section" id="tab-promo">
+            <div class="form-group">
+                <label>Название акции (3-50)</label>
+                <input type="text" id="adminPromoTitle" placeholder="Сет недели" maxlength="50" />
+            </div>
+            <div class="form-group">
+                <label>Описание (3-200)</label>
+                <input type="text" id="adminPromoDesc" placeholder="3 ролла + напиток в подарок" maxlength="200" />
+            </div>
+            <button class="btn btn-primary" id="adminAddPromoBtn">➕ Добавить акцию</button>
+            <div class="item-list" id="adminPromoList"></div>
+        </div>
+
+        <!-- Отзывы -->
+        <div class="admin-section" id="tab-reviews">
+            <div class="form-group">
+                <label>Имя (2-50)</label>
+                <input type="text" id="adminReviewName" placeholder="Анна" maxlength="50" />
+            </div>
+            <div class="form-group">
+                <label>Текст отзыва (3-500)</label>
+                <textarea id="adminReviewText" placeholder="Очень вкусно!" maxlength="500"></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Оценка (1-5)</label>
+                    <input type="number" id="adminReviewRating" placeholder="5" min="1" max="5" />
+                </div>
+                <div class="form-group">
+                    <label>Дата</label>
+                    <input type="text" id="adminReviewDate" placeholder="12.02.2025" maxlength="20" />
+                </div>
+            </div>
+            <button class="btn btn-primary" id="adminAddReviewBtn">➕ Добавить отзыв</button>
+            <div class="item-list" id="adminReviewList"></div>
+        </div>
+
+        <!-- Настройки -->
+        <div class="admin-section" id="tab-settings">
+            <div class="form-group">
+                <label>Телефон</label>
+                <input type="tel" id="adminPhone" placeholder="+7 (999) 123-45-67" maxlength="20" />
+            </div>
+            <div class="form-group">
+                <label>Адрес</label>
+                <input type="text" id="adminAddress" placeholder="г. Тверь, ул. Примерная, д. 1" maxlength="100" />
+            </div>
+            <div class="form-group">
+                <label>Самовывоз</label>
+                <input type="text" id="adminPickup" placeholder="Самовывоз: адрес уточняется" maxlength="100" />
+            </div>
+            <div class="form-group">
+                <label>Минимальная сумма (₽)</label>
+                <input type="number" id="adminMinOrder" placeholder="1000" min="100" max="999999" />
+            </div>
+            <button class="btn btn-primary" id="adminSaveSettingsBtn">💾 Сохранить</button>
+            <div class="admin-footer">
+                <button class="btn-logout" id="adminLogoutBtn">🚪 Выйти</button>
+            </div>
+        </div>
+
+        <!-- Безопасность -->
+        <div class="admin-section" id="tab-security">
+            <div class="security-info">
+                🔒 <strong>Текущая защита:</strong><br>
+                ✅ XSS-экранирование<br>
+                ✅ CSRF-токены<br>
+                ✅ AES-GCM шифрование<br>
+                ✅ PBKDF2 (100k итераций)<br>
+                ✅ HMAC-SHA256 подписи<br>
+                ✅ Rate limiting<br>
+                ✅ Блокировка брутфорса<br>
+                ✅ Авто-выход 30 минут
+            </div>
+
+            <div class="form-group">
+                <label>Изменить пароль (мин. 8)</label>
+                <input type="password" id="adminNewPassword" placeholder="Новый пароль" autocomplete="new-password" />
+            </div>
+            <div class="form-group">
+                <label>Повторите пароль</label>
+                <input type="password" id="adminNewPasswordConfirm" placeholder="Повторите" autocomplete="new-password" />
+            </div>
+            <button class="btn btn-primary" id="adminChangePasswordBtn">🔑 Изменить пароль</button>
+
+            <div class="admin-footer" style="margin-top:16px;">
+                <button class="btn btn-primary" id="adminExportBtn" style="background:#2e7d32; margin-bottom:8px;">💾 Экспорт данных</button>
+                <button class="btn btn-primary" id="adminImportBtn" style="background:#1976d2; margin-bottom:8px;">📂 Импорт</button>
+                <input type="file" id="adminImportFile" accept=".json" style="display:none;" />
+                <button class="btn btn-primary" id="adminViewLogsBtn" style="background:#f57c00; margin-bottom:8px;">📋 Логи</button>
+                <button class="btn btn-primary" id="adminResetBtn" style="background:#c62828;">🔄 Сбросить всё</button>
+            </div>
+
+            <div id="adminLogsContainer" style="display:none;">
+                <div class="logs-panel" id="adminLogsPanel"></div>
+                <button class="btn btn-sm" id="adminClearLogsBtn" style="background:#666; margin-top:8px;">🗑️ Очистить логи</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== BOTTOM NAV (PWA) ===== -->
+    <div class="bottom-nav" id="bottomNav">
+        <button class="nav-item active" data-target="home">
+            <i class="fas fa-home"></i>
+            <span>Главная</span>
+        </button>
+        <button class="nav-item" data-target="menu">
+            <i class="fas fa-utensils"></i>
+            <span>Меню</span>
+        </button>
+        <button class="nav-item" data-target="promo">
+            <i class="fas fa-tags"></i>
+            <span>Акции</span>
+        </button>
+        <button class="nav-item" id="bottomCartBtn">
+            <i class="fas fa-shopping-bag"></i>
+            <span>Корзина</span>
+            <span class="nav-badge" id="bottomCartBadge">0</span>
+        </button>
+        <button class="nav-item" data-target="profile">
+            <i class="fas fa-user"></i>
+            <span>Профиль</span>
+        </button>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div>
+                <div class="logo">Ток<span>Ë</span></div>
+                <p style="margin-top:6px; color:#888;">© 2026 Доставка в Твери</p>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Главная</a>
+                <a href="#menu">Меню</a>
+                <a href="#promo">Акции</a>
+            </div>
+            <div class="footer-links">
+                <a href="#reviews">Отзывы</a>
+                <a href="#about">О компании</a>
+                <a href="#contacts">Контакты</a>
+            </div>
+            <div class="footer-privacy">
+                <a href="#" onclick="alert('Политика конфиденциальности'); return false;">Политика конфиденциальности</a>
+                &nbsp;•&nbsp;
+                <a href="#" onclick="alert('Пользовательское соглашение'); return false;">Пользовательское соглашение</a>
+                <br>
+                <span style="font-size:0.7rem; color:#666;">Сайт защищён: XSS, CSRF, PBKDF2, HMAC</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== СКРИПТЫ ===== -->
+    <script src="script.js"></script>
+
+</body>
+</html>
