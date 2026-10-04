@@ -11,15 +11,15 @@
     <meta name="author" content="ТокË" />
 
     <!-- ===== PWA ===== -->
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="manifest.json" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="ТокË" />
     <meta name="theme-color" content="#d32f2f" />
     <meta name="msapplication-TileColor" content="#d32f2f" />
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512x512.png" />
+    <link rel="apple-touch-icon" href="icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512x512.png" />
 
     <!-- ===== БЕЗОПАСНОСТЬ ===== -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
@@ -28,8 +28,28 @@
     <!-- ===== FONTAWESOME ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- ===== СТИЛИ ===== -->
-    <link rel="stylesheet" href="styles.css" />
+    <!-- ===== АВТО-ВЕРСИЯ КЕША ===== -->
+    <script>
+        // Автоматическая версия кеша — обновляется каждый день
+        // Клиенты автоматически получают свежую версию
+        (function() {
+            const v = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+            window.ASSET_VERSION = v;
+            
+            // Загружаем CSS с версией
+            const css = document.createElement('link');
+            css.rel = 'stylesheet';
+            css.href = 'styles.css?v=' + v;
+            document.head.appendChild(css);
+            
+            // Загружаем JS с версией (после загрузки DOM)
+            document.addEventListener('DOMContentLoaded', function() {
+                const js = document.createElement('script');
+                js.src = 'script.js?v=' + v;
+                document.body.appendChild(js);
+            });
+        })();
+    </script>
 </head>
 <body>
 
@@ -189,7 +209,7 @@
                         <p><strong>📍 Доставка осуществляется по Твери</strong></p>
                         <p><strong>💰 Минимальная сумма заказа:</strong> 1000 ₽</p>
                         <p><strong>🚚 Стоимость доставки:</strong> 200 ₽ (может меняться)</p>
-                        <p><strong>🏠 Самовывоз:</strong> Адрес самовывоза уточняется</p>
+                        <p><strong>🏠 Самовывоз:</strong> ул. Гусева 46</p>
                         <p><strong>💳 Способы оплаты:</strong> Наличными, картой через терминал, онлайн-оплата</p>
                     </div>
                 </div>
@@ -201,9 +221,9 @@
             <div class="container">
                 <h2 class="section-title">Контакты</h2>
                 <div class="contacts-grid" id="contactsGrid">
-                    <div class="contact-item"><i class="fas fa-phone"></i> <span><strong id="contactPhone">+7 (999) 123-45-67</strong></span></div>
-                    <div class="contact-item"><i class="fas fa-map-pin"></i> <span><strong id="contactAddress">г. Тверь, ул. Примерная, д. 1</strong></span></div>
-                    <div class="contact-item"><i class="fas fa-store"></i> <span id="contactPickup">Самовывоз: адрес уточняется</span></div>
+                    <div class="contact-item"><i class="fas fa-phone"></i> <span><strong id="contactPhone">+7 910 835 42 29</strong></span></div>
+                    <div class="contact-item"><i class="fas fa-map-pin"></i> <span><strong id="contactAddress">г. Тверь, ул. Гусева 46</strong></span></div>
+                    <div class="contact-item"><i class="fas fa-store"></i> <span id="contactPickup">Самовывоз: ул. Гусева 46</span></div>
                     <div class="contact-item"><i class="fab fa-vk"></i> <span><a href="#" onclick="alert('🔗 Ссылка на VK (заглушка)')" style="color:#d32f2f;font-weight:600;">Мы ВКонтакте</a></span></div>
                 </div>
             </div>
@@ -266,7 +286,7 @@
         </div>
     </div>
 
-    <!-- ===== ORDER MODAL (С АДРЕСОМ И СОГЛАСИЕМ) ===== -->
+    <!-- ===== ORDER MODAL ===== -->
     <div class="modal" id="orderModal">
         <div class="modal-content">
             <button class="modal-close" id="orderModalClose">✕</button>
@@ -292,7 +312,7 @@
                     </select>
                 </div>
 
-                <!-- АДРЕС ДОСТАВКИ (ОБЯЗАТЕЛЬНЫЕ ПОЛЯ) -->
+                <!-- АДРЕС ДОСТАВКИ -->
                 <div class="delivery-fields" id="deliveryFields">
                     <div class="address-title">
                         <i class="fas fa-map-marker-alt"></i>
@@ -422,8 +442,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>URL фото</label>
-                <input type="url" id="adminProductImage" placeholder="https://..." maxlength="500" />
+                <label>URL фото (без images/)</label>
+                <input type="text" id="adminProductImage" placeholder="chili-party.jpg" maxlength="500" />
             </div>
             <button class="btn btn-primary" id="adminAddProductBtn">➕ Добавить товар</button>
             <div class="item-list" id="adminProductList"></div>
@@ -471,15 +491,15 @@
         <div class="admin-section" id="tab-settings">
             <div class="form-group">
                 <label>Телефон</label>
-                <input type="tel" id="adminPhone" placeholder="+7 (999) 123-45-67" maxlength="20" />
+                <input type="tel" id="adminPhone" placeholder="+7 910 835 42 29" maxlength="20" />
             </div>
             <div class="form-group">
                 <label>Адрес</label>
-                <input type="text" id="adminAddress" placeholder="г. Тверь, ул. Примерная, д. 1" maxlength="100" />
+                <input type="text" id="adminAddress" placeholder="г. Тверь, ул. Гусева 46" maxlength="100" />
             </div>
             <div class="form-group">
                 <label>Самовывоз</label>
-                <input type="text" id="adminPickup" placeholder="Самовывоз: адрес уточняется" maxlength="100" />
+                <input type="text" id="adminPickup" placeholder="Самовывоз: ул. Гусева 46" maxlength="100" />
             </div>
             <div class="form-group">
                 <label>Минимальная сумма (₽)</label>
@@ -584,9 +604,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- ===== СКРИПТЫ ===== -->
-    <script src="script.js"></script>
 
 </body>
 </html>
