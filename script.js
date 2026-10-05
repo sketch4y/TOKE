@@ -1,6 +1,6 @@
 // ============================================================
-//  ТокË — ЗАЩИЩЁННЫЙ СКРИПТ v7.0
-//  Пути с images/ — фото в папке images/
+//  ТокË — ЗАЩИЩЁННЫЙ СКРИПТ v7.1
+//  Исправлено: фото в модалке
 // ============================================================
 
 // ⚠️ ЗАМЕНИТЕ НА СВОЙ URL ИЗ APPS SCRIPT
@@ -231,7 +231,7 @@ let isAdminLoggedIn = localStorage.getItem(ADMIN_SESSION_KEY) === 'true';
 let sessionTimer = null;
 
 // ============================================================
-//  БЛОК 8: ДАННЫЕ (ПУТИ С images/)
+//  БЛОК 8: ДАННЫЕ
 // ============================================================
 
 function getDefaultData() {
@@ -572,7 +572,7 @@ function renderReviews() {
 }
 
 // ============================================================
-//  БЛОК 16: МОДАЛКА ТОВАРА
+//  БЛОК 16: МОДАЛКА ТОВАРА (ИСПРАВЛЕНО!)
 // ============================================================
 
 let currentProduct = null;
@@ -585,11 +585,13 @@ function openProductModal(productId) {
     currentProduct = product;
     currentQty = 1;
 
+    // ✅ Фото: без escapeHTML — чтобы путь не ломался
     const imageEl = document.getElementById('productDetailImage');
-    const safeImage = isSafeURL(product.image) ? escapeHTML(product.image) : '';
+    const safeImage = isSafeURL(product.image) ? product.image : '';
     imageEl.src = safeImage;
-    imageEl.alt = escapeHTML(product.name);
+    imageEl.alt = product.name;
 
+    // ✅ Текст: через textContent — безопасно и работает
     document.getElementById('productDetailName').textContent = product.name;
     document.getElementById('productDetailDesc').textContent = product.desc;
     document.getElementById('productDetailWeight').textContent = product.weight;
@@ -1328,9 +1330,9 @@ async function init() {
         resetSessionTimer();
     }
 
-    console.log('%c🛡️ ТокË — Защищённая версия 7.0', 'color:#d32f2f; font-size:16px; font-weight:bold;');
-    console.log('✅ Пути images/ — фото из папки');
-    console.log('✅ Модалка товара');
+    console.log('%c🛡️ ТокË — Защищённая версия 7.1', 'color:#d32f2f; font-size:16px; font-weight:bold;');
+    console.log('✅ Фото в модалке исправлено');
+    console.log('✅ Пути images/');
     console.log('✅ Ровная сетка');
     console.log('✅ Мобильная версия');
     console.log('✅ Все защиты активны');
