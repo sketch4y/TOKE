@@ -19,7 +19,6 @@
     <meta name="msapplication-TileColor" content="#d32f2f" />
     <link rel="apple-touch-icon" href="icon-192x192.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="icon-512x512.png" />
 
     <!-- ===== БЕЗОПАСНОСТЬ ===== -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
@@ -30,19 +29,15 @@
 
     <!-- ===== АВТО-ВЕРСИЯ КЕША ===== -->
     <script>
-        // Автоматическая версия кеша — обновляется каждый день
-        // Клиенты автоматически получают свежую версию
         (function() {
             const v = new Date().toISOString().slice(0, 10).replace(/-/g, '');
             window.ASSET_VERSION = v;
-            
-            // Загружаем CSS с версией
+
             const css = document.createElement('link');
             css.rel = 'stylesheet';
             css.href = 'styles.css?v=' + v;
             document.head.appendChild(css);
-            
-            // Загружаем JS с версией (после загрузки DOM)
+
             document.addEventListener('DOMContentLoaded', function() {
                 const js = document.createElement('script');
                 js.src = 'script.js?v=' + v;
@@ -127,10 +122,10 @@
                         <h3>Роллы</h3>
                         <p>Свежие, сочные, хрустящие</p>
                     </div>
-                    <div class="category-card" onclick="filterMenu('pizza')">
-                        <div class="emoji">🍕</div>
-                        <h3>Пицца</h3>
-                        <p>Тонкое тесто, сочные начинки</p>
+                    <div class="category-card" onclick="filterMenu('sets')">
+                        <div class="emoji">🎁</div>
+                        <h3>Сеты</h3>
+                        <p>Ассорти для компании</p>
                     </div>
                 </div>
             </div>
@@ -152,9 +147,8 @@
                     <button class="filter-btn active" data-filter="all">Все</button>
                     <button class="filter-btn" data-filter="sushi">Суши</button>
                     <button class="filter-btn" data-filter="rolls">Роллы</button>
-                    <button class="filter-btn" data-filter="pizza">Пицца</button>
                     <button class="filter-btn" data-filter="sets">Сеты</button>
-                    <button class="filter-btn" data-filter="promo">Акции</button>
+                    <button class="filter-btn" data-filter="pizza">Пицца</button>
                 </div>
                 <div class="products-grid" id="menuGrid"></div>
             </div>
@@ -238,6 +232,49 @@
         </section>
     </main>
 
+    <!-- ===== PRODUCT DETAIL MODAL ===== -->
+    <div class="modal" id="productModal">
+        <div class="modal-content product-detail-modal">
+            <button class="modal-close" id="productModalClose">✕</button>
+
+            <div class="product-detail">
+                <div class="product-detail-image">
+                    <img id="productDetailImage" src="" alt="" />
+                </div>
+
+                <div class="product-detail-info">
+                    <h2 id="productDetailName">Название</h2>
+
+                    <div class="product-detail-meta">
+                        <span class="meta-item"><i class="fas fa-weight-hanging"></i> <span id="productDetailWeight">0 г</span></span>
+                        <span class="meta-item"><i class="fas fa-fire" style="color:#ff6b35;"></i> <span id="productDetailCalories">0 ккал</span></span>
+                    </div>
+
+                    <div class="product-detail-section">
+                        <h3>📝 Состав</h3>
+                        <p id="productDetailDesc">Описание</p>
+                    </div>
+
+                    <div class="product-detail-section">
+                        <h3>💰 Цена</h3>
+                        <div class="product-detail-price" id="productDetailPrice">0 ₽</div>
+                    </div>
+
+                    <div class="product-detail-actions">
+                        <div class="qty-selector">
+                            <button class="qty-btn" id="qtyMinus">−</button>
+                            <span class="qty-value" id="qtyValue">1</span>
+                            <button class="qty-btn" id="qtyPlus">+</button>
+                        </div>
+                        <button class="btn btn-primary add-to-cart-detail" id="addToCartDetailBtn">
+                            🛒 В корзину
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== CART MODAL ===== -->
     <div class="modal" id="cartModal">
         <div class="modal-content">
@@ -293,7 +330,6 @@
             <h2><i class="fas fa-clipboard-list" style="color:#d32f2f;"></i> Оформление заказа</h2>
             <form id="orderForm" autocomplete="on" novalidate>
 
-                <!-- КОНТАКТЫ -->
                 <div class="form-group">
                     <label>Имя <span class="required">*</span></label>
                     <input type="text" id="orderName" placeholder="Ваше имя" required minlength="2" maxlength="50" autocomplete="name" />
@@ -303,7 +339,6 @@
                     <input type="tel" id="orderPhone" placeholder="+7 999 123-45-67" required autocomplete="tel" />
                 </div>
 
-                <!-- СПОСОБ ПОЛУЧЕНИЯ -->
                 <div class="form-group">
                     <label>Способ получения</label>
                     <select id="orderDeliveryType">
@@ -312,7 +347,6 @@
                     </select>
                 </div>
 
-                <!-- АДРЕС ДОСТАВКИ -->
                 <div class="delivery-fields" id="deliveryFields">
                     <div class="address-title">
                         <i class="fas fa-map-marker-alt"></i>
@@ -350,7 +384,6 @@
                     </div>
                 </div>
 
-                <!-- ОПЛАТА -->
                 <div class="form-group">
                     <label>Способ оплаты</label>
                     <select id="orderPayment">
@@ -360,7 +393,6 @@
                     </select>
                 </div>
 
-                <!-- СОГЛАСИЕ -->
                 <div class="privacy-consent">
                     <input type="checkbox" id="privacyConsent" required />
                     <label for="privacyConsent">
@@ -405,7 +437,6 @@
             <button data-tab="security">Безопасность</button>
         </div>
 
-        <!-- Товары -->
         <div class="admin-section active" id="tab-products">
             <div class="form-group">
                 <label>Название (2-50)</label>
@@ -442,14 +473,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>URL фото (без images/)</label>
-                <input type="text" id="adminProductImage" placeholder="chili-party.jpg" maxlength="500" />
+                <label>URL фото</label>
+                <input type="text" id="adminProductImage" placeholder="images/chili-party.jpg" maxlength="500" />
             </div>
             <button class="btn btn-primary" id="adminAddProductBtn">➕ Добавить товар</button>
             <div class="item-list" id="adminProductList"></div>
         </div>
 
-        <!-- Акции -->
         <div class="admin-section" id="tab-promo">
             <div class="form-group">
                 <label>Название акции (3-50)</label>
@@ -463,7 +493,6 @@
             <div class="item-list" id="adminPromoList"></div>
         </div>
 
-        <!-- Отзывы -->
         <div class="admin-section" id="tab-reviews">
             <div class="form-group">
                 <label>Имя (2-50)</label>
@@ -487,7 +516,6 @@
             <div class="item-list" id="adminReviewList"></div>
         </div>
 
-        <!-- Настройки -->
         <div class="admin-section" id="tab-settings">
             <div class="form-group">
                 <label>Телефон</label>
@@ -511,7 +539,6 @@
             </div>
         </div>
 
-        <!-- Безопасность -->
         <div class="admin-section" id="tab-security">
             <div class="security-info">
                 🔒 <strong>Текущая защита:</strong><br>
