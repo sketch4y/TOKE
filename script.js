@@ -4,7 +4,7 @@
 // ============================================================
 
 // ⚠️ ЗАМЕНИТЕ НА СВОЙ URL ИЗ APPS SCRIPT
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxjbn-PgiO9U__sHRKKgGl1Oq7_PeYtAlq5eOLm2EVvQv-s7g-O2s0rzW28UziAhnPIiA/exec';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxnE4ly6tOhzxzRVTnNmMaV_vr1nsOYetoRSmomPPp806c32dI-pu5GAf1cWE876ZGlIQ/exec';
 
 // ============================================================
 //  БЛОК 1: ЗАЩИТА ОТ XSS
