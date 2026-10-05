@@ -1,6 +1,6 @@
 // ============================================================
-//  ТокË — ЗАЩИЩЁННЫЙ СКРИПТ v5.4
-//  Фото в корне (без папки images/)
+//  ТокË — ЗАЩИЩЁННЫЙ СКРИПТ v7.0
+//  Пути с images/ — фото в папке images/
 // ============================================================
 
 // ⚠️ ЗАМЕНИТЕ НА СВОЙ URL ИЗ APPS SCRIPT
@@ -231,49 +231,46 @@ let isAdminLoggedIn = localStorage.getItem(ADMIN_SESSION_KEY) === 'true';
 let sessionTimer = null;
 
 // ============================================================
-//  БЛОК 8: ДАННЫЕ (ФОТО БЕЗ ПАПКИ images/)
+//  БЛОК 8: ДАННЫЕ (ПУТИ С images/)
 // ============================================================
 
 function getDefaultData() {
     return {
         defaultProducts: [
             // ===== РОЛЛЫ =====
-            { id: 1, name: 'Чили-вечиринка', desc: 'Лосось, сливочный сыр, огурец', weight: '250 г', price: 699, category: 'rolls', calories: 380, image: 'chili-party.jpg' },
-            { id: 2, name: 'Манго-Креветка', desc: 'Креветка, манго, сливочный сыр', weight: '300 г', price: 649, category: 'rolls', calories: 340, image: 'mango-shrimp.jpg' },
-            { id: 3, name: 'Филка с клубникой', desc: 'Рис, нори, сыр сливочный, клубника, лосось', weight: '280 г', price: 749, category: 'rolls', calories: 420, image: 'strawberry-filka.jpg' },
-            { id: 4, name: 'Манго-кисс', desc: 'Манго, лосось, сыр', weight: '260 г', price: 699, category: 'rolls', calories: 380, image: 'mango-kiss.jpg' },
-            { id: 5, name: 'Креветочный бриз', desc: 'Рис, рисовая бумага, сыр сливочный, креветки в темпура, салат', weight: '260 г', price: 649, category: 'rolls', calories: 340, image: 'shrimp-breeze.jpg' },
-            { id: 6, name: 'Мангомания', desc: 'Рис, рисовая бумага, сыр сливочный, лосось, манго', weight: '250 г', price: 649, category: 'rolls', calories: 380, image: 'mangomania.jpg' },
-            { id: 7, name: 'Карамельная филка', desc: 'Лосось, карамель, кунжут', weight: '280 г', price: 749, category: 'rolls', calories: 420, image: 'caramel-filka.jpg' },
-            { id: 8, name: 'Ролл опаленный с гребешком', desc: 'Гребешок, соус, кунжут', weight: '260 г', price: 749, category: 'rolls', calories: 420, image: 'roll-scallop.jpg' },
-            { id: 9, name: 'Ролл ройс', desc: 'Ассорти из 4 роллов', weight: '300 г', price: 899, category: 'rolls', calories: 500, image: 'roll-royce.jpg' },
+            { id: 1, name: 'Чили-вечиринка', desc: 'Лосось, сливочный сыр, огурец, соус чили, кунжут', weight: '250 г', price: 699, category: 'rolls', calories: 380, image: 'images/chili-party.jpg' },
+            { id: 2, name: 'Манго-Креветка', desc: 'Креветка в темпура, манго, сливочный сыр, огурец, кунжут', weight: '300 г', price: 649, category: 'rolls', calories: 340, image: 'images/mango-shrimp.jpg' },
+            { id: 3, name: 'Филка с клубникой', desc: 'Рис, нори, сливочный сыр, клубника, лосось, кунжут', weight: '280 г', price: 749, category: 'rolls', calories: 420, image: 'images/strawberry-filka.jpg' },
+            { id: 4, name: 'Манго-кисс', desc: 'Манго, лосось, сливочный сыр, огурец, соус унаги', weight: '260 г', price: 699, category: 'rolls', calories: 380, image: 'images/mango-kiss.jpg' },
+            { id: 5, name: 'Креветочный бриз', desc: 'Рис, рисовая бумага, сливочный сыр, креветки в темпура, салат, соус', weight: '260 г', price: 649, category: 'rolls', calories: 340, image: 'images/shrimp-breeze.jpg' },
+            { id: 6, name: 'Мангомания', desc: 'Рис, рисовая бумага, сливочный сыр, лосось, манго, кунжут', weight: '250 г', price: 649, category: 'rolls', calories: 380, image: 'images/mangomania.jpg' },
+            { id: 7, name: 'Карамельная филка', desc: 'Лосось, карамель, сливочный сыр, кунжут', weight: '280 г', price: 749, category: 'rolls', calories: 420, image: 'images/caramel-filka.jpg' },
+            { id: 8, name: 'Ролл опаленный с гребешком', desc: 'Гребешок, сливочный сыр, соус унаги, кунжут', weight: '260 г', price: 749, category: 'rolls', calories: 420, image: 'images/roll-scallop.jpg' },
+            { id: 9, name: 'Ролл ройс', desc: 'Ассорти из 4 роллов на выбор', weight: '300 г', price: 899, category: 'rolls', calories: 500, image: 'images/roll-royce.jpg' },
 
             // ===== СУШИ =====
-            { id: 10, name: 'Дымчатый жемчуг', desc: 'Рис, рисовая бумага, сыр сливочный, лосось, тобико, лук зеленый', weight: '250 г', price: 399, category: 'sushi', calories: 240, image: 'smoky-pearl.jpg' },
-            { id: 11, name: 'Аками', desc: 'Тунец, рис, васаби', weight: '250 г', price: 450, category: 'sushi', calories: 260, image: 'akami.jpg' },
-
-            // ===== ПИЦЦА (пока пусто) =====
+            { id: 10, name: 'Дымчатый жемчуг', desc: 'Рис, рисовая бумага, сливочный сыр, лосось х/к, тобико, лук зелёный', weight: '250 г', price: 399, category: 'sushi', calories: 240, image: 'images/smoky-pearl.jpg' },
+            { id: 11, name: 'Аками', desc: 'Тунец, рис, васаби', weight: '250 г', price: 450, category: 'sushi', calories: 260, image: 'images/akami.jpg' },
 
             // ===== СЕТЫ =====
-            { id: 12, name: 'Сет номер 1', desc: 'Ассорти роллов и суши', weight: '950 г', price: 1590, category: 'sets', calories: 1800, image: 'set-1.jpg' },
-            { id: 13, name: 'Сет номер 2', desc: 'Большой сет для компании', weight: '1100 г', price: 1890, category: 'sets', calories: 2100, image: 'set-2.jpg' },
-            { id: 14, name: 'Сет номер 3', desc: 'Премиум сет', weight: '1200 г', price: 2290, category: 'sets', calories: 2300, image: 'set-3.jpg' },
-            { id: 15, name: 'Сет суши', desc: 'Ассорти суши', weight: '800 г', price: 1290, category: 'sets', calories: 1500, image: 'set-sushi.jpg' },
-            { id: 16, name: 'Сет гунканов', desc: 'Ассорти гунканов', weight: '700 г', price: 1390, category: 'sets', calories: 1400, image: 'set-gunkan.jpg' },
-            { id: 17, name: 'Сет Маки', desc: 'Ассорти маки-роллов', weight: '850 г', price: 1490, category: 'sets', calories: 1700, image: 'set-maki.jpg' },
-            { id: 18, name: 'Сет фруктовый сад', desc: 'Фруктовые роллы', weight: '700 г', price: 1390, category: 'sets', calories: 1200, image: 'set-fruit.jpg' }
+            { id: 12, name: 'Сет номер 1', desc: 'Ассорти роллов и суши (Филадельфия, Калифорния, суши с лососем)', weight: '950 г', price: 1590, category: 'sets', calories: 1800, image: 'images/set-1.jpg' },
+            { id: 13, name: 'Сет номер 2', desc: 'Большой сет для компании (4 ролла + 8 суши)', weight: '1100 г', price: 1890, category: 'sets', calories: 2100, image: 'images/set-2.jpg' },
+            { id: 14, name: 'Сет номер 3', desc: 'Премиум сет с лососем, угрём и креветкой', weight: '1200 г', price: 2290, category: 'sets', calories: 2300, image: 'images/set-3.jpg' },
+            { id: 15, name: 'Сет суши', desc: 'Ассорти из 12 суши на выбор', weight: '800 г', price: 1290, category: 'sets', calories: 1500, image: 'images/set-sushi.jpg' },
+            { id: 16, name: 'Сет гунканов', desc: 'Ассорти гунканов с лососем, тунцом и угрём', weight: '700 г', price: 1390, category: 'sets', calories: 1400, image: 'images/set-gunkan.jpg' },
+            { id: 17, name: 'Сет Маки', desc: 'Ассорти маки-роллов (6 видов)', weight: '850 г', price: 1490, category: 'sets', calories: 1700, image: 'images/set-maki.jpg' },
+            { id: 18, name: 'Сет фруктовый сад', desc: 'Фруктовые роллы с манго, клубникой и бананом', weight: '700 г', price: 1390, category: 'sets', calories: 1200, image: 'images/set-fruit.jpg' }
         ],
         defaultPromos: [
-            // ===== АКЦИИ (СКИДКИ, БОНУСЫ — БЕЗ СЕТОВ) =====
             { title: '🔥 Скидка 20%', desc: 'На первый заказ от 2000 ₽' },
             { title: '🎁 Напиток в подарок', desc: 'При заказе от 1500 ₽' },
             { title: '🍱 Бесплатная доставка', desc: 'При заказе от 2500 ₽' },
             { title: '💝 Бонус 300 ₽', desc: 'На следующий заказ' }
         ],
         defaultReviews: [
-            { name: 'Анна', rating: 5, text: 'Очень вкусно! Доставка быстрая.', date: '12.02.2025' },
-            { name: 'Иван', rating: 5, text: 'Лучшие роллы в городе!', date: '10.02.2025' },
-            { name: 'Мария', rating: 4, text: 'Пицца отличная!', date: '08.02.2025' }
+            { name: 'Анна', rating: 5, text: 'Очень вкусно! Доставка быстрая, заказ приехал горячим.', date: '12.02.2025' },
+            { name: 'Иван', rating: 5, text: 'Лучшие роллы в городе! Качество на высоте.', date: '10.02.2025' },
+            { name: 'Мария', rating: 4, text: 'Пицца отличная, но немного остыла. Вкус компенсирует!', date: '08.02.2025' }
         ],
         defaultSettings: {
             phone: '+7 910 835 42 29',
@@ -370,7 +367,7 @@ function resetSessionTimer() {
 }
 
 // ============================================================
-//  БЛОК 12: 📧 ОТПРАВКА В GOOGLE ТАБЛИЦУ
+//  БЛОК 12: ОТПРАВКА В GOOGLE ТАБЛИЦУ
 // ============================================================
 
 async function sendOrderToGoogleSheets(orderData) {
@@ -420,6 +417,8 @@ async function sendOrderToGoogleSheets(orderData) {
 
 function updateCartUI() {
     if (cartBadge) cartBadge.textContent = getCartCount();
+    const bottomBadge = document.getElementById('bottomCartBadge');
+    if (bottomBadge) bottomBadge.textContent = getCartCount();
     renderCartItems();
     const total = getCartTotal();
     if (cartTotal) cartTotal.textContent = total + ' ₽';
@@ -507,11 +506,11 @@ function renderProducts(gridId, list, filter = 'all') {
     grid.innerHTML = filtered.map(p => {
         const safeImage = isSafeURL(p.image) ? escapeHTML(p.image) : '';
         return `
-            <div class="product-card">
+            <div class="product-card" data-product-id="${Number(p.id)}">
                 ${isAdmin ? `
                     <div class="admin-actions show">
-                        <button onclick="editProduct(${Number(p.id)})"><i class="fas fa-pen"></i></button>
-                        <button onclick="deleteProduct(${Number(p.id)})"><i class="fas fa-trash"></i></button>
+                        <button onclick="event.stopPropagation(); editProduct(${Number(p.id)})"><i class="fas fa-pen"></i></button>
+                        <button onclick="event.stopPropagation(); deleteProduct(${Number(p.id)})"><i class="fas fa-trash"></i></button>
                     </div>
                 ` : ''}
                 <img src="${safeImage}" alt="${escapeHTML(p.name)}" loading="lazy" />
@@ -526,8 +525,20 @@ function renderProducts(gridId, list, filter = 'all') {
             </div>
         `;
     }).join('');
+
+    grid.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('.add-to-cart') || e.target.closest('.admin-actions')) return;
+            const productId = Number(card.dataset.productId);
+            openProductModal(productId);
+        });
+    });
+
     grid.querySelectorAll('.add-to-cart:not([disabled])').forEach(btn => {
-        btn.addEventListener('click', () => addToCart(Number(btn.dataset.id)));
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            addToCart(Number(btn.dataset.id));
+        });
     });
 }
 
@@ -561,7 +572,89 @@ function renderReviews() {
 }
 
 // ============================================================
-//  БЛОК 16: ОФОРМЛЕНИЕ ЗАКАЗА
+//  БЛОК 16: МОДАЛКА ТОВАРА
+// ============================================================
+
+let currentProduct = null;
+let currentQty = 1;
+
+function openProductModal(productId) {
+    const product = data.products.find(p => p.id === productId);
+    if (!product) return;
+
+    currentProduct = product;
+    currentQty = 1;
+
+    const imageEl = document.getElementById('productDetailImage');
+    const safeImage = isSafeURL(product.image) ? escapeHTML(product.image) : '';
+    imageEl.src = safeImage;
+    imageEl.alt = escapeHTML(product.name);
+
+    document.getElementById('productDetailName').textContent = product.name;
+    document.getElementById('productDetailDesc').textContent = product.desc;
+    document.getElementById('productDetailWeight').textContent = product.weight;
+    document.getElementById('productDetailCalories').textContent = (product.calories || 0) + ' ккал';
+    document.getElementById('productDetailPrice').textContent = product.price + ' ₽';
+    document.getElementById('qtyValue').textContent = '1';
+
+    document.getElementById('productModal')?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProductModal() {
+    document.getElementById('productModal')?.classList.remove('open');
+    document.body.style.overflow = '';
+    currentProduct = null;
+    currentQty = 1;
+}
+
+function changeDetailQty(delta) {
+    const newQty = currentQty + delta;
+    if (newQty < 1) return;
+    if (newQty > MAX_QTY) return;
+    currentQty = newQty;
+    document.getElementById('qtyValue').textContent = currentQty;
+}
+
+async function addCurrentProductToCart() {
+    if (!currentProduct) return;
+
+    const existing = cart.find(i => i.id === currentProduct.id);
+    if (existing) {
+        existing.qty = Math.min(Number(existing.qty) + currentQty, MAX_QTY);
+    } else {
+        cart.push({
+            id: currentProduct.id,
+            name: currentProduct.name,
+            price: currentProduct.price,
+            calories: currentProduct.calories,
+            qty: currentQty
+        });
+    }
+
+    await saveAllData();
+    updateCartUI();
+    showToast(`✅ ${escapeHTML(currentProduct.name)} × ${currentQty} добавлен`);
+    closeProductModal();
+}
+
+document.getElementById('productModalClose')?.addEventListener('click', closeProductModal);
+document.getElementById('productModal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeProductModal();
+});
+document.getElementById('qtyMinus')?.addEventListener('click', () => changeDetailQty(-1));
+document.getElementById('qtyPlus')?.addEventListener('click', () => changeDetailQty(1));
+document.getElementById('addToCartDetailBtn')?.addEventListener('click', addCurrentProductToCart);
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        if (document.getElementById('productModal')?.classList.contains('open')) {
+            closeProductModal();
+        }
+    }
+});
+
+// ============================================================
+//  БЛОК 17: ОФОРМЛЕНИЕ ЗАКАЗА
 // ============================================================
 
 document.getElementById('orderForm')?.addEventListener('submit', async (e) => {
@@ -706,7 +799,7 @@ document.getElementById('orderForm')?.addEventListener('submit', async (e) => {
 });
 
 // ============================================================
-//  БЛОК 17: ИСТОРИЯ ЗАКАЗОВ
+//  БЛОК 18: ИСТОРИЯ ЗАКАЗОВ
 // ============================================================
 
 function renderOrders() {
@@ -740,7 +833,7 @@ function renderOrders() {
 }
 
 // ============================================================
-//  БЛОК 18: АДМИН
+//  БЛОК 19: АДМИН
 // ============================================================
 
 async function initAdminPassword() {
@@ -813,7 +906,7 @@ function openAdminPanel() {
 }
 
 // ============================================================
-//  БЛОК 19: СЕКРЕТНЫЕ 12 КЛИКОВ
+//  БЛОК 20: СЕКРЕТНЫЕ 12 КЛИКОВ
 // ============================================================
 
 let clickCount = 0;
@@ -838,7 +931,7 @@ function initSecretLogo() {
 }
 
 // ============================================================
-//  БЛОК 20: ПОКАЗ/СКРЫТИЕ ПОЛЕЙ АДРЕСА
+//  БЛОК 21: ПОЛЯ АДРЕСА
 // ============================================================
 
 function initOrderForm() {
@@ -870,10 +963,14 @@ function initOrderForm() {
 }
 
 // ============================================================
-//  БЛОК 21: ВСЕ ОСТАЛЬНЫЕ ОБРАБОТЧИКИ
+//  БЛОК 22: ОСТАЛЬНЫЕ ОБРАБОТЧИКИ
 // ============================================================
 
 document.getElementById('cartBtn')?.addEventListener('click', () => {
+    document.getElementById('cartModal')?.classList.add('open');
+    updateCartUI();
+});
+document.getElementById('bottomCartBtn')?.addEventListener('click', () => {
     document.getElementById('cartModal')?.classList.add('open');
     updateCartUI();
 });
@@ -985,7 +1082,7 @@ document.querySelectorAll('.admin-tabs button').forEach(btn => {
 });
 
 // ============================================================
-//  БЛОК 22: АДМИН ДЕЙСТВИЯ
+//  БЛОК 23: АДМИН ДЕЙСТВИЯ
 // ============================================================
 
 document.getElementById('adminAddProductBtn')?.addEventListener('click', async () => {
@@ -996,7 +1093,7 @@ document.getElementById('adminAddProductBtn')?.addEventListener('click', async (
     const weight = document.getElementById('adminProductWeight')?.value.trim() || '';
     const calories = parseInt(document.getElementById('adminProductCalories')?.value) || 0;
     const category = document.getElementById('adminProductCategory')?.value || 'rolls';
-    const image = document.getElementById('adminProductImage')?.value.trim() || 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=300&h=200&fit=crop';
+    const image = document.getElementById('adminProductImage')?.value.trim() || 'images/chili-party.jpg';
 
     if (!isValidName(name)) { showToast('⚠️ Название 2-50 символов'); return; }
     if (!desc || desc.length < 3) { showToast('⚠️ Описание минимум 3 символа'); return; }
@@ -1198,7 +1295,26 @@ function renderAll() {
 }
 
 // ============================================================
-//  БЛОК 23: ИНИЦИАЛИЗАЦИЯ
+//  БЛОК 24: BOTTOM NAV
+// ============================================================
+
+document.querySelectorAll('.bottom-nav .nav-item[data-target]').forEach(item => {
+    item.addEventListener('click', () => {
+        const target = item.dataset.target;
+        document.querySelectorAll('.bottom-nav .nav-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+
+        if (target === 'profile') {
+            document.getElementById('profileBtn')?.click();
+        } else {
+            const section = document.getElementById(target);
+            if (section) section.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+// ============================================================
+//  БЛОК 25: ИНИЦИАЛИЗАЦИЯ
 // ============================================================
 
 async function init() {
@@ -1212,8 +1328,11 @@ async function init() {
         resetSessionTimer();
     }
 
-    console.log('%c🛡️ ТокË — Защищённая версия 5.4', 'color:#d32f2f; font-size:16px; font-weight:bold;');
-    console.log('✅ Фото без папки images/');
+    console.log('%c🛡️ ТокË — Защищённая версия 7.0', 'color:#d32f2f; font-size:16px; font-weight:bold;');
+    console.log('✅ Пути images/ — фото из папки');
+    console.log('✅ Модалка товара');
+    console.log('✅ Ровная сетка');
+    console.log('✅ Мобильная версия');
     console.log('✅ Все защиты активны');
 }
 
