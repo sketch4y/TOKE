@@ -238,7 +238,7 @@ function getDefaultData() {
     return {
         defaultProducts: [
             // ===== РОЛЛЫ =====
-            { id: 1, name: 'Чили-вечиринка', desc: 'Рис, нори, сыр сливочный, авокадо, манго, грибешок, соус чили сладкий, микрозелень.' weight: '250 г', price: 700, category: 'rolls', calories: 380, image: 'images/chili-party.jpg' },
+            { id: 1, name: 'Чили-вечиринка', desc: 'Рис, нори, сыр сливочный, авокадо, манго, грибешок, соус чили сладкий, микрозелень.', weight: '250 г', price: 700, category: 'rolls', calories: 380, image: 'images/chili-party.jpg' },
             { id: 2, name: 'Манго-Креветка', desc: 'Рис, нори, сыр сливочный, креветка в темпура, манго, креветки, унаги.', weight: '300 г', price: 990, category: 'rolls', calories: 340, image: 'images/mango-shrimp.jpg' },
             { id: 3, name: 'Филка с клубникой', desc: 'Рис, нори, сливочный сыр, клубника, лосось.', weight: '280 г', price: 890, category: 'rolls', calories: 420, image: 'images/strawberry-filka.jpg' },
             { id: 4, name: 'Манго-кисс', desc: 'Рис, сыр сливочный, нори, лосось, манго, соус спайси, масаго, фурикаке.', weight: '260 г', price: 700, category: 'rolls', calories: 380, image: 'images/mango-kiss.jpg' },
@@ -255,7 +255,7 @@ function getDefaultData() {
             // ===== СЕТЫ =====
             { id: 16, name: 'Сет гунканов', desc: 'Гункан тунец 3шт, гункан креветка 3 шт, гункан гребешок 3шт, гункан лосось 3шт', weight: '480 г', price: 1900, category: 'sets', calories: 1400, image: 'images/set-gunkan.jpg' },
             { id: 17, name: 'Сет Маки', desc: 'Маки лосось, сырный маки, дайкон маки, краб маки, тунец маки, огурец маки', weight: '750 г', price: 1900, category: 'sets', calories: 1700, image: 'images/set-maki.jpg' },
-            { id: 18, name: 'Сет фруктовый сад', desc: 'Филка с клубникой, манго-кис, коеветки-манго', weight: '850 г', price: 2600, category: 'sets', calories: 1200, image: 'images/set-fruit.jpg' }
+            { id: 18, name: 'Сет фруктовый сад', desc: 'Филка с клубникой, манго-кис, коеветки-манго', weight: '850 г', price: 2600, category: 'sets', calories: 1200, image: 'images/set-fruit.jpg' },
             { id: 15, name: 'Сет суши', desc: 'Суши тунец 2шт, суши угорь 2шт, суши креветка 2шт, суши лосось 2шт.', weight: '320 г', price: 1200, category: 'sets', calories: 1500, image: 'images/set-sushi.jpg' },
             { id: 12, name: 'Сет номер 1', desc: 'Суши лосось с икрой 4шт, суши опаленный лосось 4шт, филадельфия с икрой 1шт.', weight: '450 г', price: 2200, category: 'sets', calories: 1800, image: 'images/set-1.jpg' },
             { id: 13, name: 'Сет номер 2', desc: 'Ролл оплаенный с гребешком, дракон, маки с огурцом, маки с тунцом, 4 суши опаленный лосось', weight: '950 г', price: 2600, category: 'sets', calories: 2100, image: 'images/set-2.jpg' },
@@ -512,7 +512,7 @@ function renderProducts(gridId, list, filter = 'all') {
                     </div>
                 ` : ''}
                 <img src="${safeImage}" alt="${escapeHTML(p.name)}" loading="lazy" />
-                <h4>${escapeHTML(p.name)}</h4>
+                <h3 class="product-title">${escapeHTML(p.name)}</h3>
                 <div class="desc">${escapeHTML(p.desc)}</div>
                 <div class="weight">${escapeHTML(p.weight)}</div>
                 <div class="calories"><i class="fas fa-fire" style="color:#ff6b35;"></i> ${Number(p.calories) || 0} ккал</div>
