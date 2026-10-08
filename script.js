@@ -238,34 +238,32 @@ function getDefaultData() {
     return {
         defaultProducts: [
             // ===== РОЛЛЫ =====
-            { id: 1, name: 'Чили-вечиринка', desc: 'Лосось, сливочный сыр, огурец, соус чили, кунжут', weight: '250 г', price: 699, category: 'rolls', calories: 380, image: 'images/chili-party.jpg' },
-            { id: 2, name: 'Манго-Креветка', desc: 'Креветка в темпура, манго, сливочный сыр, огурец, кунжут', weight: '300 г', price: 649, category: 'rolls', calories: 340, image: 'images/mango-shrimp.jpg' },
-            { id: 3, name: 'Филка с клубникой', desc: 'Рис, нори, сливочный сыр, клубника, лосось, кунжут', weight: '280 г', price: 749, category: 'rolls', calories: 420, image: 'images/strawberry-filka.jpg' },
-            { id: 4, name: 'Манго-кисс', desc: 'Манго, лосось, сливочный сыр, огурец, соус унаги', weight: '260 г', price: 699, category: 'rolls', calories: 380, image: 'images/mango-kiss.jpg' },
-            { id: 5, name: 'Креветочный бриз', desc: 'Рис, рисовая бумага, сливочный сыр, креветки в темпура, салат, соус', weight: '260 г', price: 649, category: 'rolls', calories: 340, image: 'images/shrimp-breeze.jpg' },
-            { id: 6, name: 'Мангомания', desc: 'Рис, рисовая бумага, сливочный сыр, лосось, манго, кунжут', weight: '250 г', price: 649, category: 'rolls', calories: 380, image: 'images/mangomania.jpg' },
-            { id: 7, name: 'Карамельная филка', desc: 'Лосось, карамель, сливочный сыр, кунжут', weight: '280 г', price: 749, category: 'rolls', calories: 420, image: 'images/caramel-filka.jpg' },
+            { id: 1, name: 'Чили-вечиринка', desc: 'Рис, нори, сыр, авокадо, манго, грибешок, соус чили сладкий, микрозелень.' weight: '250 г', price: 699, category: 'rolls', calories: 380, image: 'images/chili-party.jpg' },
+            { id: 2, name: 'Манго-Креветка', desc: 'Рис, нори, сыр, креветка в темпуре, манго, креветки', weight: '300 г', price: 649, category: 'rolls', calories: 340, image: 'images/mango-shrimp.jpg' },
+            { id: 3, name: 'Филка с клубникой', desc: 'Рис, нори, сливочный сыр, клубника, лосось.', weight: '280 г', price: 990, category: 'rolls', calories: 420, image: 'images/strawberry-filka.jpg' },
+            { id: 4, name: 'Манго-кисс', desc: 'Рис, сыр, лосось, манго, соус спайси, тобика', weight: '260 г', price: 699, category: 'rolls', calories: 380, image: 'images/mango-kiss.jpg' },
+            { id: 5, name: 'Креветочный бриз', desc: 'Рис, рисовая бумага, сливочный сыр, креветки в темпура, салат, соус, тобика', weight: '240 г', price: 950, category: 'rolls', calories: 340, image: 'images/shrimp-breeze.jpg' },
+            { id: 6, name: 'Мангомания', desc: 'Рис, рисовая бумага, сливочный сыр, лосось, манго, микрозелень, соус манго', weight: '250 г', price: 890, category: 'rolls', calories: 380, image: 'images/mangomania.jpg' },
+            { id: 7, name: 'Карамельная филка', desc: 'Рис, нори, сыр филадельфия, огурец, лосоь, карамель, микрозелень.', weight: '280 г', price: 749, category: 'rolls', calories: 420, image: 'images/caramel-filka.jpg' },
             { id: 8, name: 'Ролл опаленный с гребешком', desc: 'Гребешок, сливочный сыр, соус унаги, кунжут', weight: '260 г', price: 749, category: 'rolls', calories: 420, image: 'images/roll-scallop.jpg' },
             { id: 9, name: 'Ролл ройс', desc: 'Ассорти из 4 роллов на выбор', weight: '300 г', price: 899, category: 'rolls', calories: 500, image: 'images/roll-royce.jpg' },
 
-            // ===== СУШИ =====
-            { id: 10, name: 'Дымчатый жемчуг', desc: 'Рис, рисовая бумага, сливочный сыр, лосось х/к, тобико, лук зелёный', weight: '250 г', price: 399, category: 'sushi', calories: 240, image: 'images/smoky-pearl.jpg' },
-            { id: 11, name: 'Аками', desc: 'Тунец, рис, васаби', weight: '250 г', price: 450, category: 'sushi', calories: 260, image: 'images/akami.jpg' },
+            // ===== РОЛЫ =====
+            { id: 10, name: 'Дымчатый жемчуг', desc: 'Рис, рисовая бумага, сливочный сыр, лосось х/к, тобика, лук зелёный', weight: '240 г', price: 890, category: 'rolls', calories: 240, image: 'images/smoky-pearl.jpg' },
+            { id: 11, name: 'Аками', desc: 'Рис, нори, жареные креветки, сыр сливочный, лосось, авокадо, тобини, унаги.', weight: '250 г', price: 450, category: 'rolls', calories: 260, image: 'images/akami.jpg' },
 
             // ===== СЕТЫ =====
-            { id: 12, name: 'Сет номер 1', desc: 'Ассорти роллов и суши (Филадельфия, Калифорния, суши с лососем)', weight: '950 г', price: 1590, category: 'sets', calories: 1800, image: 'images/set-1.jpg' },
-            { id: 13, name: 'Сет номер 2', desc: 'Большой сет для компании (4 ролла + 8 суши)', weight: '1100 г', price: 1890, category: 'sets', calories: 2100, image: 'images/set-2.jpg' },
-            { id: 14, name: 'Сет номер 3', desc: 'Премиум сет с лососем, угрём и креветкой', weight: '1200 г', price: 2290, category: 'sets', calories: 2300, image: 'images/set-3.jpg' },
-            { id: 15, name: 'Сет суши', desc: 'Ассорти из 12 суши на выбор', weight: '800 г', price: 1290, category: 'sets', calories: 1500, image: 'images/set-sushi.jpg' },
-            { id: 16, name: 'Сет гунканов', desc: 'Ассорти гунканов с лососем, тунцом и угрём', weight: '700 г', price: 1390, category: 'sets', calories: 1400, image: 'images/set-gunkan.jpg' },
-            { id: 17, name: 'Сет Маки', desc: 'Ассорти маки-роллов (6 видов)', weight: '850 г', price: 1490, category: 'sets', calories: 1700, image: 'images/set-maki.jpg' },
-            { id: 18, name: 'Сет фруктовый сад', desc: 'Фруктовые роллы с манго, клубникой и бананом', weight: '700 г', price: 1390, category: 'sets', calories: 1200, image: 'images/set-fruit.jpg' }
+            { id: 16, name: 'Сет гунканов', desc: 'Гункан тунец 3шт, креветка 3 шт, гребешок, 3шт, лосось 3шт', weight: '480 г', price: 2900, category: 'sets', calories: 1400, image: 'images/set-gunkan.jpg' },
+            { id: 17, name: 'Сет Маки', desc: 'Ролл-лосось, сырный ролл, дайкон ролл, краб ролл, тунец ролл, огурец ролл', weight: '750 г', price: 1490, category: 'sets', calories: 1700, image: 'images/set-maki.jpg' },
+            { id: 18, name: 'Сет фруктовый сад', desc: 'Филка с клубникой, манго-кис, коеветки-манго', weight: '700 г', price: 2900, category: 'sets', calories: 1200, image: 'images/set-fruit.jpg' }
+            { id: 15, name: 'Сет суши', desc: 'Суши тунец 2шт, суши угорь 2шт, суши креветка 2шт, суши лосось 2шт.', weight: '320 г', price: 1800, category: 'sets', calories: 1500, image: 'images/set-sushi.jpg' },
+            { id: 12, name: 'Сет номер 1', desc: 'Суши лосоь с икрой 4шт, суши опаленный лосось 4шт, филадельфия с икрой 1шт.', weight: '950 г', price: 1590, category: 'sets', calories: 1800, image: 'images/set-1.jpg' },
+            { id: 13, name: 'Сет номер 2', desc: 'Ролл оплаенный с гребешком, дракон, маки с огурцом, маки с тунцом, 4 суши опаленный лососью', weight: '1100 г', price: 1890, category: 'sets', calories: 2100, image: 'images/set-2.jpg' },
+            { id: 14, name: 'Сет номер 3', desc: 'Мангомания, креветочный бриз, запеченный краб, запеченый тунец, калифорния темпура, чикен темпура.', weight: '1200 г', price: 2290, category: 'sets', calories: 2300, image: 'images/set-3.jpg' },
         ],
         defaultPromos: [
-            { title: '🔥 Скидка 20%', desc: 'На первый заказ от 2000 ₽' },
             { title: '🎁 Напиток в подарок', desc: 'При заказе от 1500 ₽' },
-            { title: '🍱 Бесплатная доставка', desc: 'При заказе от 2500 ₽' },
-            { title: '💝 Бонус 300 ₽', desc: 'На следующий заказ' }
+            { title: '🍱 Бесплатная доставка', desc: 'При заказе от 1000 ₽' },
         ],
         defaultReviews: [
             { name: 'Анна', rating: 5, text: 'Очень вкусно! Доставка быстрая, заказ приехал горячим.', date: '12.02.2025' },
